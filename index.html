@@ -1,1 +1,1090 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apprecio · Nómina</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F4EE;
+    --ink: #1C1917;
+    --muted: #78716C;
+    --accent: #E8500A;
+    --accent-light: #FFF0EA;
+    --border: #E7E2D9;
+    --surface: #FFFFFF;
+    --success: #16A34A;
+    --success-light: #F0FDF4;
+    --indigo: #4338CA;
+    --indigo-light: #EEF2FF;
+  }
 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    padding: 0 40px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .logo em { color: var(--accent); font-style: normal; }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .role-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .role-jefatura { background: var(--accent); color: #fff; }
+  .role-cultura  { background: var(--indigo); color: #fff; }
+
+  .period-indicator {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ── SCREENS ── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── LOGIN ── */
+  #screen-login {
+    min-height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  #screen-login.active { display: flex; }
+
+  .login-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 8px 40px rgba(28,25,23,0.08);
+  }
+
+  .login-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .login-logo em { color: var(--accent); font-style: normal; }
+
+  .login-sub {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+
+  .form-group { margin-bottom: 20px; }
+
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    background: var(--bg);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: var(--accent);
+    background: #fff;
+  }
+
+  .btn-primary {
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 8px;
+  }
+  .btn-primary:hover { background: #C94208; transform: translateY(-1px); }
+  .btn-primary:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+
+  .login-note {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+
+  /* ── MAIN APP ── */
+  #screen-app {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .page-title {
+    font-family: 'Fraunces', serif;
+    font-size: 34px;
+    letter-spacing: -1px;
+    margin-bottom: 6px;
+    line-height: 1.1;
+  }
+
+  .page-sub {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+
+  /* ── PERIOD BANNER ── */
+  .period-banner {
+    background: var(--success-light);
+    border: 1px solid #BBF7D0;
+    border-radius: 12px;
+    padding: 14px 20px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--success);
+  }
+
+  .period-banner.closed {
+    background: #FFF7ED;
+    border-color: #FED7AA;
+    color: #C2410C;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .card-header {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .card-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+
+  .icon-orange { background: var(--accent-light); }
+  .icon-indigo { background: var(--indigo-light); }
+
+  .card-header h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+  }
+  .card-header p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  .card-body { padding: 24px; }
+
+  /* ── FORM FIELDS ── */
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--muted);
+    margin-bottom: 7px;
+  }
+
+  .field select,
+  .field input {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    background: var(--bg);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .field select:focus,
+  .field input:focus {
+    border-color: var(--accent);
+    background: #fff;
+  }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .btn-add {
+    width: 100%;
+    background: none;
+    border: 1.5px dashed var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 4px;
+  }
+  .btn-add:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-light);
+  }
+
+  /* ── ENTRY LIST ── */
+  .entry-list { margin-top: 16px; }
+
+  .entry-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    animation: fadeIn 0.2s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .entry-info .name { font-size: 14px; font-weight: 600; }
+  .entry-info .detail { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  .entry-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+
+  .entry-amount {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .entry-amount.pts { color: var(--indigo); }
+
+  .btn-del {
+    background: none;
+    border: none;
+    color: var(--border);
+    cursor: pointer;
+    font-size: 14px;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+  .btn-del:hover { color: #DC2626; background: #FEF2F2; }
+
+  .empty-state {
+    text-align: center;
+    padding: 24px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* ── SUMMARY BAR ── */
+  .summary-bar {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .summary-bar strong { color: var(--ink); }
+
+  /* ── SUBMIT ── */
+  .submit-area {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-submit {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-submit:hover { background: #C94208; transform: translateY(-1px); }
+  .btn-submit:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+
+  .btn-submit.indigo { background: var(--indigo); }
+  .btn-submit.indigo:hover { background: #3730A3; }
+
+  .submit-note { font-size: 13px; color: var(--muted); }
+
+  /* ── COUNTRY TABS ── */
+  .country-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .ctab {
+    padding: 11px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .ctab:hover { color: var(--ink); }
+  .ctab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .ctab.indigo.active { color: var(--indigo); border-bottom-color: var(--indigo); }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: var(--ink);
+    color: #fff;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 999;
+    max-width: 360px;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ── LOADING ── */
+  .spinner {
+    width: 18px; height: 18px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 560px) {
+    header { padding: 0 16px; }
+    #screen-app { padding: 24px 16px 60px; }
+    .login-card { padding: 32px 24px; }
+    .field-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header id="app-header" style="display:none;">
+  <div class="logo">apprecio<em>·</em></div>
+  <div class="header-right">
+    <span class="period-indicator" id="header-period"></span>
+    <span class="role-badge" id="header-role"></span>
+  </div>
+</header>
+
+<!-- ══ SCREEN: LOGIN ══ -->
+<div id="screen-login" class="screen active">
+  <div class="login-card">
+    <div class="login-logo">apprecio<em>·</em></div>
+    <div class="login-sub">Sistema de Nómina Mensual</div>
+
+    <div class="form-group">
+      <label>Tu email corporativo</label>
+      <input type="email" id="login-email" placeholder="nombre@apprecio.com" autocomplete="email">
+    </div>
+
+    <div class="form-group">
+      <label>Rol</label>
+      <select id="login-rol">
+        <option value="">Selecciona tu rol...</option>
+        <option value="jefatura">Jefatura (Ingresos Variables)</option>
+        <option value="cultura">Cultura & Talento (Puntos)</option>
+      </select>
+    </div>
+
+    <button class="btn-primary" onclick="login()">Ingresar →</button>
+
+    <div class="login-note">
+      Tu email se usará para identificar a tu equipo.<br>
+      Solo verás los colaboradores a tu cargo.
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN: APP ══ -->
+<div id="screen-app" class="screen">
+
+  <div id="period-banner" class="period-banner">
+    🟢 <span id="period-text">Cargando período...</span>
+  </div>
+
+  <!-- ── JEFATURA VIEW ── -->
+  <div id="view-jefatura" style="display:none;">
+    <div class="page-title">Reporte de<br>Novedades Variables</div>
+    <p class="page-sub">Solo aparecen los colaboradores de tu equipo.</p>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-orange">💼</div>
+        <div>
+          <h2>Agregar novedad</h2>
+          <p>Comisiones y bonos del mes</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="field">
+          <label>Mes del reporte</label>
+          <select id="jef-mes">
+            <option value="">Selecciona el mes...</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Colaborador</label>
+          <select id="jef-colaborador">
+            <option value="">Cargando equipo...</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Descripción</label>
+            <select id="jef-desc">
+              <option value="Bono Rewards">Bono Rewards</option>
+              <option value="Bono Fee">Bono Fee</option>
+              <option value="Bono Excepcional">Bono Excepcional</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Monto (moneda local)</label>
+            <input type="number" id="jef-monto" placeholder="Ej: 150000" min="0">
+          </div>
+        </div>
+        <button class="btn-add" onclick="agregarNovedad()">＋ Agregar al listado</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-orange">📋</div>
+        <div>
+          <h2>Novedades ingresadas</h2>
+          <p>Revisa antes de enviar</p>
+        </div>
+      </div>
+      <div class="entry-list" id="jef-lista" style="padding:0 24px 8px;">
+        <div class="empty-state">Aún no has agregado novedades.</div>
+      </div>
+      <div class="summary-bar">
+        <span>Registros: <strong id="jef-count">0</strong></span>
+        <span>Total: <strong id="jef-total">0</strong></span>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <button class="btn-submit" id="jef-btn-enviar" onclick="enviarJefatura()" disabled>
+        Enviar reporte
+      </button>
+      <span class="submit-note">Los datos se guardarán automáticamente en el sistema.</span>
+    </div>
+  </div>
+
+  <!-- ── CULTURA VIEW ── -->
+  <div id="view-cultura" style="display:none;">
+    <div class="page-title">Reporte de<br>Puntos</div>
+    <p class="page-sub">Ingresa los puntos del mes para toda la compañía.</p>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-indigo">⭐</div>
+        <div>
+          <h2>Agregar puntos</h2>
+          <p>1 punto = 1 unidad en moneda local · Sin conversión</p>
+        </div>
+      </div>
+
+      <div class="country-tabs" id="cultura-tabs">
+        <button class="ctab indigo active" data-pais="Chile" onclick="cambiarPaisCultura(this)">🇨🇱 Chile</button>
+        <button class="ctab indigo" data-pais="Peru" onclick="cambiarPaisCultura(this)">🇵🇪 Perú</button>
+        <button class="ctab indigo" data-pais="Colombia" onclick="cambiarPaisCultura(this)">🇨🇴 Colombia</button>
+        <button class="ctab indigo" data-pais="Mexico" onclick="cambiarPaisCultura(this)">🇲🇽 México</button>
+      </div>
+
+      <div class="card-body">
+        <div class="field-row">
+          <div class="field">
+            <label>Mes del reporte</label>
+            <select id="cul-mes">
+              <option value="">Selecciona el mes...</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Colaborador</label>
+            <select id="cul-colaborador">
+              <option value="">Selecciona país primero...</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Tipo de puntos</label>
+            <select id="cul-tipo">
+              <option value="Welcome Pack">Welcome Pack</option>
+              <option value="Cumpleaños">Cumpleaños</option>
+              <option value="Aniversario">Aniversario</option>
+              <option value="Insignia">Insignia</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Cantidad de puntos</label>
+            <input type="number" id="cul-puntos" placeholder="Ej: 500" min="1">
+          </div>
+        </div>
+        <button class="btn-add" onclick="agregarPuntos()">＋ Agregar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-indigo">📋</div>
+        <div>
+          <h2>Puntos ingresados</h2>
+          <p>Revisa antes de enviar</p>
+        </div>
+      </div>
+      <div class="entry-list" id="cul-lista" style="padding:0 24px 8px;">
+        <div class="empty-state">Aún no has agregado registros.</div>
+      </div>
+      <div class="summary-bar">
+        <span>Registros: <strong id="cul-count">0</strong></span>
+        <span>Total puntos: <strong id="cul-total">0</strong></span>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <button class="btn-submit indigo" id="cul-btn-enviar" onclick="enviarCultura()" disabled>
+        Enviar reporte de puntos
+      </button>
+      <span class="submit-note">Los datos se guardarán automáticamente.</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ TOAST ══ -->
+<div class="toast" id="toast">
+  <span id="toast-msg"></span>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+//  CONFIGURACIÓN — edita estas variables
+// ══════════════════════════════════════════════
+const N8N_WEBHOOK_JEFATURA = 'https://n8n.openip.cl/webhook/apprecio-variables';
+const N8N_WEBHOOK_CULTURA  = 'https://n8n.openip.cl/webhook/apprecio-puntos';
+
+// Período activo — edita cada mes
+const PERIODO = {
+  mes:    'Marzo 2025',
+  inicio: '2025-03-01',
+  cierre: '2025-03-31',
+  abierto: true,
+};
+
+// Equipo — copia aquí el listado desde tu hoja "Equipo"
+// Formato: { id: 'RUT/DNI', nombre: 'Nombre', pais: 'Chile', jefatura: 'email@apprecio.com' }
+const EQUIPO = [
+{ id: '1192802547', nombre: 'Acuña Arevalo Kevin Manuel', pais: 'Colombia', jefatura: 'ivaldovinos@apprecio.com'},
+{ id: '1022436929', nombre: 'Avila Herrera Aura Maria', pais: 'Colombia', jefatura: 'dindaburu@apprecio.com'},
+{ id: '1018449251', nombre: 'Cuellar Rivera Santiago', pais: 'Colombia', jefatura: 'dindaburu@apprecio.com'},
+{ id: '1019123542', nombre: 'Galindo Cedeño Laura Daniela', pais: 'Colombia', jefatura: 'dindaburu@apprecio.com'},
+{ id: '1233901448', nombre: 'Gomez Verdugo Lina Dayana', pais: 'Colombia', jefatura: 'mperez@apprecio.com'},
+{ id: '1010247584', nombre: 'Hernandez Medina Luisa Maria', pais: 'Colombia', jefatura: 'dindaburu@apprecio.com'},
+{ id: '1015408803', nombre: 'Hernandez Santiago Sharon Yezenia', pais: 'Colombia', jefatura: 'dindaburu@apprecio.com'},
+{ id: '1022421684', nombre: 'Herrera Martinez Faber Duvan', pais: 'Colombia', jefatura: 'ivaldovinos@apprecio.com'},
+{ id: '1020771905', nombre: 'Indaburu Ruiz Daniel', pais: 'Colombia', jefatura: 'srojas@apprecio.com'},
+{ id: '1193454336', nombre: 'Leon Atuesta Andersson Augusto', pais: 'Colombia', jefatura: 'dindaburu@apprecio.com'},
+{ id: '1014195119', nombre: 'Molina Sanchez Roberto Jose', pais: 'Colombia', jefatura: 'dindaburu@apprecio.com'},
+{ id: '1023948449', nombre: 'Ospina Rodriguez Andres Felipe', pais: 'Colombia', jefatura: 'dindaburu@apprecio.com'},
+{ id: '1072712309', nombre: 'Rodriguez Garzon Gabriel Ernesto', pais: 'Colombia', jefatura: 'srodriguez@apprecio.com'},
+{ id: '1019092022', nombre: 'Ruiz Galeano Julieth Katherine', pais: 'Colombia', jefatura: 'ivaldovinos@apprecio.com'},
+{ id: '52792764', nombre: 'Silva Vega Magda Carolina', pais: 'Colombia', jefatura: 'dindaburu@apprecio.com'},
+{ id: '1001161038', nombre: 'Vera Cordero Wilder Andres', pais: 'Colombia', jefatura: 'ivaldovinos@apprecio.com'},
+{ id: '47578962', nombre: 'Alvarado Herrera Samuel Elias', pais: 'Perú', jefatura: 'kli@apprecio.com'},
+{ id: '73863888', nombre: 'Cotrina Mesias Jose Alejandro', pais: 'Perú', jefatura: 'mperez@apprecio.com'},
+{ id: '44845963', nombre: 'Duran Urquiaga De Lopez Diana Carolina', pais: 'Perú', jefatura: 'kli@apprecio.com'},
+{ id: '45464858', nombre: 'Guerra Vela Joao Junior', pais: 'Perú', jefatura: 'kli@apprecio.com'},
+{ id: '42701827', nombre: 'Li Kam Katia Cristina', pais: 'Perú', jefatura: 'srojas@apprecio.com'},
+{ id: '72624430', nombre: 'Maya Velarde Francis Alexander', pais: 'Perú', jefatura: 'kli@apprecio.com'},
+{ id: '70207293', nombre: 'Mendoza Tirado Adriana Delia', pais: 'Perú', jefatura: 'kli@apprecio.com'},
+{ id: '42655079', nombre: 'Moreno Gomez Cesar Antonio Aaron', pais: 'Perú', jefatura: 'ivaldovinos@apprecio.com'},
+{ id: '41151019', nombre: 'Rivarola Castro Karina Jeanette', pais: 'Perú', jefatura: 'jceballos@apprecio.com'},
+{ id: '75985238', nombre: 'Roldan Salazar Diana Lucia', pais: 'Perú', jefatura: 'sgajardo@apprecio.com'},
+{ id: '46396824', nombre: 'Sernaqué Amaya Magda', pais: 'Perú', jefatura: 'kli@apprecio.com'},
+{ id: '47330946', nombre: 'Serquen Campos Kewin Daniel', pais: 'Perú', jefatura: 'jleiva@apprecio.com'},
+{ id: '74873591', nombre: 'Villavicencio Mendez Melanie Daphnne', pais: 'Perú', jefatura: 'kli@apprecio.com'},
+{ id: '17.023.228-3', nombre: 'Agliati Quezada Alvaro', pais: 'Chile', jefatura: 'srojas@apprecio.com'},
+{ id: '15.065.556-0', nombre: 'Ahumada Margery Ivonne Del Pilar', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
+{ id: '20.009.204-k', nombre: 'Albrecht Cofre Valentina Paz', pais: 'Chile', jefatura: 'mperez@apprecio.com'},
+{ id: '17.650.754-3', nombre: 'Allendes Araos Darling Danitza', pais: 'Chile', jefatura: 'srojas@apprecio.com'},
+{ id: '25.476.024-2', nombre: 'Alvarado Mendoza Nayrim Mercedes', pais: 'Chile', jefatura: 'mperez@apprecio.com'},
+{ id: '16.921.127-2', nombre: 'Ayala Maturana Camilo Andres', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
+{ id: '20.435.372-7', nombre: 'Bahamondes Guerrero Paulina Lilian', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
+{ id: '18.092.760-3', nombre: 'Bulnes Paulsen Leandro Elías', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
+{ id: '24.639.458-k', nombre: 'Calzada Martinez Lady Johanna', pais: 'Chile', jefatura: 'srojas@apprecio.com'},
+{ id: '19.636.548-6', nombre: 'Camus Solari Esteban Eduardo', pais: 'Chile', jefatura: 'sgajardo@apprecio.com'},
+{ id: '18.308.937-4', nombre: 'Canto Pizarro Sebastián Elías', pais: 'Chile', jefatura: 'srodriguez@apprecio.com'},
+{ id: '16.030.138-4', nombre: 'Cárcamo Durán Verónica Franchesca', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
+{ id: '19.668.643-6', nombre: 'Castro Pizarro Benjamín Alejandro', pais: 'Chile', jefatura: 'srojas@apprecio.com'},
+{ id: '18.615.891-1', nombre: 'Castro Saavedra Catherine Paola', pais: 'Chile', jefatura: 'srodriguez@apprecio.com'},
+{ id: '13.724.324-5', nombre: 'Ceballos Argo Juan Ignacio', pais: 'Chile', jefatura: 'jvillatoro@apprecio.com'},
+{ id: '13.211.835-3', nombre: 'Cid Zapata Alejandro Andres', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
+{ id: '17.681.917-0', nombre: 'Conte Marza Fabian Alejandro', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
+{ id: '18.774.341-9', nombre: 'Contreras Romero Javiera Constanza', pais: 'Chile', jefatura: 'mperez@apprecio.com'},
+{ id: '19.033.293-4', nombre: 'D`Angelo Soto Stephanie Andrea', pais: 'Chile', jefatura: 'jvillatoro@apprecio.com'},
+{ id: '17.269.619-8', nombre: 'Dominguez Feliú Maria Ignacia', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
+{ id: '18.127.278-3', nombre: 'Escobar Rosales Sebastián Alejandro', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
+{ id: '18.243.626-7', nombre: 'Fierro Alarcón Nicole Alejandra', pais: 'Chile', jefatura: 'ivaldovinos@apprecio.com'},
+{ id: '19.889.819-8', nombre: 'Figueroa Mackenna Camilo', pais: 'Chile', jefatura: 'srojas@apprecio.com'},
+{ id: '26.053.148-4', nombre: 'Figueroa Ramos Fabricio Rafael', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
+{ id: '17.982.829-4', nombre: 'Gajardo Feuerhake Sebastian', pais: 'Chile', jefatura: 'srojas@apprecio.com'},
+{ id: '19.991.596-7', nombre: 'González Llanca Nataly Alessandra', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
+{ id: '20.077.642-9', nombre: 'González Riveros Benjamín Andrés', pais: 'Chile', jefatura: 'srojas@apprecio.com'},
+{ id: '20.297.991-2', nombre: 'Gutierrez Poblete Marcelo Andres', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
+{ id: '18.635.332-3', nombre: 'Hinojosa Lenck Diego', pais: 'Chile', jefatura: 'mperez@apprecio.com'},
+{ id: '19.639.035-9', nombre: 'Jamasmie Chávarri Lorenzo Angel', pais: 'Chile', jefatura: 'srojas@apprecio.com'},
+{ id: '18.828.893-6', nombre: 'Jara Jara Nicolas Javier', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
+{ id: '19.341.795-7', nombre: 'Jeria Serey Gonzalo Antonio', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
+{ id: '12.844.965-5', nombre: 'Leighton Monsalvez Johan Andres', pais: 'Chile', jefatura: 'srojas@apprecio.com'},
+{ id: '16.799.938-7', nombre: 'Leiva Navarro Emanuel Jesus', pais: 'Chile', jefatura: 'srojas@apprecio.com'},
+{ id: '18.739.997-1', nombre: 'Maldonado Carvajal Juliette Vanessa', pais: 'Chile', jefatura: 'srojas@apprecio.com'},
+{ id: '18.165.569-0', nombre: 'Molina Pinchart Ignacio Enrique', pais: 'Chile', jefatura: 'srodriguez@apprecio.com'},
+{ id: '19.606.285-8', nombre: 'Obilinovic Leon Esteban Andres', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
+{ id: '20.390.046-5', nombre: 'Osorio Paicil Bayron Saúl', pais: 'Chile', jefatura: 'sgajardo@apprecio.com'},
+{ id: '21.265.837-5', nombre: 'Parancan Flores Carmen Gloria', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
+{ id: '13.257.196-1', nombre: 'Pérez Labarca Ana Marcela', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
+{ id: '15.355.386-6', nombre: 'Pérez Lazo Daniel Edgardo', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
+{ id: '13.049.587-7', nombre: 'Petrasic Roa Daniel Antonio', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
+{ id: '10.496.694-2', nombre: 'Ramirez Gonzales Patricia Teresa', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
+{ id: '16.277.467-0', nombre: 'Rocco Salgado Cristian Francisco', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
+{ id: '15.563.184-8', nombre: 'Rojas Chamy Sebastian Ricardo', pais: 'Chile', jefatura: 'jvillatoro@apprecio.com'},
+{ id: '16.490.488-1', nombre: 'Saez Saavedra Carlos Antonio', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
+{ id: '14.586.999-4', nombre: 'Sandoval Puga Beatriz Elena', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
+{ id: '16.939.271-4', nombre: 'Silva Moya Ana María', pais: 'Chile', jefatura: 'srojas@apprecio.com'},
+{ id: '15.541.420-0', nombre: 'Soto Basualto Paulina Andrea', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
+{ id: '18.760.734-5', nombre: 'Soto Retamales Thomas Ignacio', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
+{ id: '28.769.769-4', nombre: 'Tan Tanaka Kelly Milagros', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
+{ id: '19.008.290-3', nombre: 'Torres Alves Maria Fernanda', pais: 'Chile', jefatura: 'sgajardo@apprecio.com'},
+{ id: '15.594.194-4', nombre: 'Valdivia Cepeda Cristian Rodrigo', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
+{ id: '16.207.707-4', nombre: 'Valdovinos Jofré Luis Ignacio', pais: 'Chile', jefatura: 'jvillatoro@apprecio.com'},
+{ id: '15.936.701-0', nombre: 'Valenzuela Peñaloza Constanza Andrea', pais: 'Chile', jefatura: 'mperez@apprecio.com'},
+{ id: '17.564.024-k', nombre: 'Venegas Silva Ruben Esteban', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
+{ id: '19.634.652-k', nombre: 'Vergara Solis Giovanni Alejandro', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
+{ id: '12.950.985-6', nombre: 'Villalón Baxter Pablo', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
+{ id: '12.605.423-8', nombre: 'Villatoro Gonzalez Jaime Andres', pais: 'Chile', jefatura: 'jvillatoro@apprecio.com'},
+{ id: 'OEGG930125PN6', nombre: 'Olvera Gil Giovanny', pais: 'México', jefatura: 'jvalencia@dcanje.com'},
+{ id: 'TEMJ960605KH7', nombre: 'Tejada Melchor Jessica Mariana', pais: 'México', jefatura: 'jvalencia@dcanje.com'},
+{ id: 'TUCR841111D54', nombre: 'Trujillo Cruz Rosa Colombina', pais: 'México', jefatura: 'jvalencia@dcanje.com'},
+{ id: 'VARJ890507TD1', nombre: 'Valencia Rivera Juan Camilo', pais: 'México', jefatura: 'srojas@apprecio.com'},
+];
+
+// ══════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════
+let currentUser  = null;
+let currentRol   = null;
+let novedades    = [];
+let puntos       = [];
+let paisCultura  = 'Chile';
+
+// ══════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════
+function init() {
+  poblarMeses();
+  mostrarPeriodo();
+}
+
+function poblarMeses() {
+  const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const año = new Date().getFullYear();
+  const opts = meses.map((m,i) => `<option value="${m} ${año}" ${m+' '+año===PERIODO.mes?'selected':''}>${m} ${año}</option>`).join('');
+  document.getElementById('jef-mes').innerHTML = '<option value="">Selecciona el mes...</option>' + opts;
+  document.getElementById('cul-mes').innerHTML = '<option value="">Selecciona el mes...</option>' + opts;
+}
+
+function mostrarPeriodo() {
+  const banner = document.getElementById('period-banner');
+  const text   = document.getElementById('period-text');
+  const cierre = new Date(PERIODO.cierre);
+  const hoy    = new Date();
+
+  if (!PERIODO.abierto || hoy > cierre) {
+    banner.classList.add('closed');
+    text.textContent = `Período ${PERIODO.mes} cerrado.`;
+  } else {
+    text.textContent = `Período abierto: ${PERIODO.mes} — cierra el ${cierre.toLocaleDateString('es-CL')}`;
+  }
+
+  document.getElementById('header-period').textContent = PERIODO.mes;
+}
+
+// ══════════════════════════════════════════════
+//  LOGIN
+// ══════════════════════════════════════════════
+function login() {
+  const email = document.getElementById('login-email').value.trim().toLowerCase();
+  const rol   = document.getElementById('login-rol').value;
+
+  if (!email || !email.includes('@')) { showToast('⚠️ Ingresa un email válido'); return; }
+  if (!rol) { showToast('⚠️ Selecciona tu rol'); return; }
+
+  currentUser = email;
+  currentRol  = rol;
+
+  document.getElementById('screen-login').classList.remove('active');
+  document.getElementById('screen-app').classList.add('active');
+  document.getElementById('app-header').style.display = 'flex';
+
+  const rolBadge = document.getElementById('header-role');
+  if (rol === 'jefatura') {
+    rolBadge.textContent = 'Jefatura';
+    rolBadge.className = 'role-badge role-jefatura';
+    cargarEquipoJefatura(email);
+    document.getElementById('view-jefatura').style.display = 'block';
+  } else {
+    rolBadge.textContent = 'Cultura & Talento';
+    rolBadge.className = 'role-badge role-cultura';
+    cargarEquipoCultura('Chile');
+    document.getElementById('view-cultura').style.display = 'block';
+  }
+}
+
+// ══════════════════════════════════════════════
+//  EQUIPO
+// ══════════════════════════════════════════════
+function cargarEquipoJefatura(email) {
+  const miEquipo = EQUIPO.filter(c => c.jefatura.toLowerCase() === email.toLowerCase());
+  const sel = document.getElementById('jef-colaborador');
+
+  if (miEquipo.length === 0) {
+    sel.innerHTML = '<option value="">No se encontraron colaboradores para tu email</option>';
+    showToast('⚠️ No se encontraron colaboradores asignados a tu email', 4000);
+    return;
+  }
+
+  sel.innerHTML = '<option value="">-- Selecciona colaborador --</option>' +
+    miEquipo.map(c => `<option value='${JSON.stringify(c)}'>${c.nombre} · ${c.pais}</option>`).join('');
+}
+
+function cargarEquipoCultura(pais) {
+  const equipo = EQUIPO.filter(c => c.pais === pais);
+  const sel = document.getElementById('cul-colaborador');
+  sel.innerHTML = '<option value="">-- Selecciona colaborador --</option>' +
+    equipo.map(c => `<option value='${JSON.stringify(c)}'>${c.nombre}</option>`).join('');
+}
+
+function cambiarPaisCultura(btn) {
+  document.querySelectorAll('#cultura-tabs .ctab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  paisCultura = btn.dataset.pais;
+  cargarEquipoCultura(paisCultura);
+}
+
+// ══════════════════════════════════════════════
+//  JEFATURA — NOVEDADES
+// ══════════════════════════════════════════════
+function agregarNovedad() {
+  const mes   = document.getElementById('jef-mes').value;
+  const colRaw = document.getElementById('jef-colaborador').value;
+  const desc  = document.getElementById('jef-desc').value;
+  const monto = parseFloat(document.getElementById('jef-monto').value);
+
+  if (!mes)    { showToast('⚠️ Selecciona el mes'); return; }
+  if (!colRaw) { showToast('⚠️ Selecciona un colaborador'); return; }
+  if (!monto || monto <= 0) { showToast('⚠️ Ingresa un monto válido'); return; }
+
+  const col = JSON.parse(colRaw);
+  novedades.push({ mes, col, tipo: 'Comisión/Bono', desc, monto });
+  document.getElementById('jef-monto').value = '';
+  renderNovedades();
+  showToast('✅ Novedad agregada');
+}
+
+function renderNovedades() {
+  const lista = document.getElementById('jef-lista');
+  const btn   = document.getElementById('jef-btn-enviar');
+
+  if (novedades.length === 0) {
+    lista.innerHTML = '<div class="empty-state">Aún no has agregado novedades.</div>';
+    btn.disabled = true;
+  } else {
+    lista.innerHTML = novedades.map((n,i) => `
+      <div class="entry-item">
+        <div class="entry-info">
+          <div class="name">${n.col.nombre}</div>
+          <div class="detail">${n.col.pais} · ${n.desc}</div>
+        </div>
+        <div class="entry-right">
+          <div class="entry-amount">${n.monto.toLocaleString('es-CL')}</div>
+          <button class="btn-del" onclick="eliminarNovedad(${i})">✕</button>
+        </div>
+      </div>`).join('');
+    btn.disabled = false;
+  }
+
+  const total = novedades.reduce((s,n) => s + n.monto, 0);
+  document.getElementById('jef-count').textContent = novedades.length;
+  document.getElementById('jef-total').textContent = total.toLocaleString('es-CL');
+}
+
+function eliminarNovedad(i) {
+  novedades.splice(i, 1);
+  renderNovedades();
+}
+
+async function enviarJefatura() {
+  if (novedades.length === 0) return;
+  const btn = document.getElementById('jef-btn-enviar');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Enviando...';
+
+  try {
+    const payload = {
+      email: currentUser,
+      timestamp: new Date().toISOString(),
+      novedades: novedades.map(n => ({
+        mes:        n.mes,
+        pais:       n.col.pais,
+        rut:        n.col.id,
+        nombre:     n.col.nombre,
+        tipo:       n.tipo,
+        descripcion: n.desc,
+        monto:      n.monto,
+        jefatura:   currentUser,
+      }))
+    };
+
+    const resp = await fetch(N8N_WEBHOOK_JEFATURA, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (resp.ok) {
+      showToast('✅ Reporte enviado correctamente', 4000);
+      novedades = [];
+      renderNovedades();
+      btn.innerHTML = 'Reporte enviado ✓';
+    } else {
+      throw new Error('Error en el servidor');
+    }
+  } catch(e) {
+    showToast('❌ Error al enviar. Intenta nuevamente.');
+    btn.disabled = false;
+    btn.textContent = 'Enviar reporte';
+  }
+}
+
+// ══════════════════════════════════════════════
+//  CULTURA — PUNTOS
+// ══════════════════════════════════════════════
+function agregarPuntos() {
+  const mes    = document.getElementById('cul-mes').value;
+  const colRaw = document.getElementById('cul-colaborador').value;
+  const tipo   = document.getElementById('cul-tipo').value;
+  const pts    = parseInt(document.getElementById('cul-puntos').value);
+
+  if (!mes)    { showToast('⚠️ Selecciona el mes'); return; }
+  if (!colRaw) { showToast('⚠️ Selecciona un colaborador'); return; }
+  if (!pts || pts <= 0) { showToast('⚠️ Ingresa una cantidad válida'); return; }
+
+  const col = JSON.parse(colRaw);
+  puntos.push({ mes, col, tipo, pts });
+  document.getElementById('cul-puntos').value = '';
+  renderPuntos();
+  showToast('✅ Registro agregado');
+}
+
+function renderPuntos() {
+  const lista = document.getElementById('cul-lista');
+  const btn   = document.getElementById('cul-btn-enviar');
+
+  if (puntos.length === 0) {
+    lista.innerHTML = '<div class="empty-state">Aún no has agregado registros.</div>';
+    btn.disabled = true;
+  } else {
+    lista.innerHTML = puntos.map((p,i) => `
+      <div class="entry-item">
+        <div class="entry-info">
+          <div class="name">${p.col.nombre}</div>
+          <div class="detail">${p.col.pais} · ${p.tipo}</div>
+        </div>
+        <div class="entry-right">
+          <div class="entry-amount pts">${p.pts} pts</div>
+          <button class="btn-del" onclick="eliminarPunto(${i})">✕</button>
+        </div>
+      </div>`).join('');
+    btn.disabled = false;
+  }
+
+  const total = puntos.reduce((s,p) => s + p.pts, 0);
+  document.getElementById('cul-count').textContent = puntos.length;
+  document.getElementById('cul-total').textContent = total.toLocaleString('es-CL');
+}
+
+function eliminarPunto(i) {
+  puntos.splice(i, 1);
+  renderPuntos();
+}
+
+async function enviarCultura() {
+  if (puntos.length === 0) return;
+  const btn = document.getElementById('cul-btn-enviar');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Enviando...';
+
+  try {
+    const payload = {
+      email: currentUser,
+      timestamp: new Date().toISOString(),
+      puntos: puntos.map(p => ({
+        mes:    p.mes,
+        pais:   p.col.pais,
+        rut:    p.col.id,
+        nombre: p.col.nombre,
+        tipo:   p.tipo,
+        puntos: p.pts,
+      }))
+    };
+
+    const resp = await fetch(N8N_WEBHOOK_CULTURA, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (resp.ok) {
+      showToast('✅ Reporte de puntos enviado correctamente', 4000);
+      puntos = [];
+      renderPuntos();
+      btn.innerHTML = 'Reporte enviado ✓';
+    } else {
+      throw new Error('Error en el servidor');
+    }
+  } catch(e) {
+    showToast('❌ Error al enviar. Intenta nuevamente.');
+    btn.disabled = false;
+    btn.textContent = 'Enviar reporte de puntos';
+  }
+}
+
+// ══════════════════════════════════════════════
+//  UTILS
+// ══════════════════════════════════════════════
+function showToast(msg, dur = 2800) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), dur);
+}
+
+init();
+</script>
+</body>
+</html>
