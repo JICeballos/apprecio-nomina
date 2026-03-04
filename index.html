@@ -690,7 +690,7 @@
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx7RApqRW83LQQiorA5-TEqJ6Vq-ipHyM472r_NchuJ3WaMYSsMBoprs-PaQLVrwh7S/exec';
 
 const PERIODO = {
-  mes:    new Date().toLocaleString('es-CL', { month: 'long', year: 'numeric' }),
+  mes: new Date().toLocaleString('es-CL', { month: 'long', year: 'numeric' }).replace(/^\w/, c => c.toUpperCase()),
   inicio: null,
   cierre: '2026-03-11',
   abierto: true,
