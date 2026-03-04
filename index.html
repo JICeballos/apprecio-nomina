@@ -692,7 +692,7 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx7RApqRW83LQQi
 const PERIODO = {
   mes:    'Marzo 2026',
   inicio: '2026-03-01',
-  cierre: '2026-03-10',
+  cierre: '2026-03-16',
   abierto: true,
 };
 
@@ -813,12 +813,9 @@ function init() {
 }
 
 function poblarMeses() {
-  const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
-                 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  const año = new Date().getFullYear();
-  const opts = meses.map(m => `<option value="${m} ${año}" ${m+' '+año===PERIODO.mes?'selected':''}>${m} ${año}</option>`).join('');
-  document.getElementById('jef-mes').innerHTML = '<option value="">Selecciona el mes...</option>' + opts;
-  document.getElementById('cul-mes').innerHTML = '<option value="">Selecciona el mes...</option>' + opts;
+  const opts = `<option value="${PERIODO.mes}" selected>${PERIODO.mes}</option>`;
+  document.getElementById('jef-mes').innerHTML = opts;
+  document.getElementById('cul-mes').innerHTML = opts;
 }
 
 function mostrarPeriodo() {
