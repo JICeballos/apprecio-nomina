@@ -583,6 +583,10 @@
             <input type="number" id="jef-monto" placeholder="Ej: 150000" min="0">
           </div>
         </div>
+        <div class="field">
+          <label>Comentario <span style="font-weight:400;text-transform:none;letter-spacing:0;">(opcional)</span></label>
+          <input type="text" id="jef-comentario" placeholder="Ej: Corresponde a horas extras de enero">
+        </div>
         <button class="btn-add" onclick="agregarNovedad()">＋ Agregar al listado</button>
       </div>
     </div>
@@ -926,7 +930,9 @@ function agregarNovedad() {
   if (!monto || monto <= 0) { showToast('⚠️ Ingresa un monto valido'); return; }
 
   const col = JSON.parse(colRaw);
-  novedades.push({ mes, col, tipo: 'Comision/Bono', desc, monto });
+  const comentario = document.getElementById('jef-comentario').value.trim();
+  novedades.push({ mes, col, tipo: 'Comision/Bono', desc, monto, comentario });
+  document.getElementById('jef-comentario').value = '';
   document.getElementById('jef-monto').value = '';
   renderNovedades();
   showToast('✅ Novedad agregada');
@@ -944,7 +950,7 @@ function renderNovedades() {
       <div class="entry-item">
         <div class="entry-info">
           <div class="name">${n.col.nombre}</div>
-          <div class="detail">${n.col.pais} · ${n.desc}</div>
+          <div class="detail">${n.col.pais} · ${n.desc}${n.comentario ? ' · ' + n.comentario : ''}</div>
         </div>
         <div class="entry-right">
           <div class="entry-amount">${n.monto.toLocaleString('es-CL')}</div>
