@@ -4,73 +4,89 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Apprecio · Nómina</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F7F4EE;
-    --ink: #1C1917;
-    --muted: #78716C;
-    --accent: #E8500A;
-    --accent-light: #FFF0EA;
-    --border: #E7E2D9;
+    --pink:    #FA345E;
+    --pink-dk: #D42050;
+    --pink-lt: #FFF0F3;
+    --dark:    #1B1B1B;
+    --purple:  #B2A8E7;
+    --purple-lt: #F0EEF9;
+    --bg:      #F6F5F8;
     --surface: #FFFFFF;
+    --border:  #E8E4EF;
+    --muted:   #7C7589;
+    --ink:     #1B1B1B;
     --success: #16A34A;
-    --success-light: #F0FDF4;
-    --indigo: #4338CA;
-    --indigo-light: #EEF2FF;
+    --success-lt: #F0FDF4;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin:0; padding:0; box-sizing:border-box; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     background: var(--bg);
     color: var(--ink);
     min-height: 100vh;
   }
 
+  /* ── PIXEL ART LOGO SVG ── */
+  .pixel-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pixel-icon {
+    width: 36px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+
   /* ── HEADER ── */
   header {
-    background: var(--ink);
+    background: var(--dark);
     padding: 0 40px;
-    height: 60px;
+    height: 62px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 100;
+    border-bottom: 2px solid var(--pink);
   }
-
-  .logo {
-    font-family: 'Fraunces', serif;
-    font-size: 20px;
-    color: #fff;
-    letter-spacing: -0.5px;
-  }
-  .logo em { color: var(--accent); font-style: normal; }
 
   .header-right {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
+  }
+
+  .period-indicator {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 400;
   }
 
   .role-badge {
     padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
   }
-  .role-jefatura { background: var(--accent); color: #fff; }
-  .role-cultura  { background: var(--indigo); color: #fff; }
-
-  .period-indicator {
-    font-size: 12px;
-    color: rgba(255,255,255,0.5);
-  }
+  .role-jefatura { background: var(--pink); color: #fff; }
+  .role-cultura  { background: var(--purple); color: var(--dark); }
 
   /* ── SCREENS ── */
   .screen { display: none; }
@@ -83,86 +99,98 @@
     align-items: center;
     justify-content: center;
     padding: 24px;
+    background: var(--dark);
   }
   #screen-login.active { display: flex; }
 
-  .login-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 48px 40px;
+  .login-wrap {
     width: 100%;
     max-width: 420px;
-    box-shadow: 0 8px 40px rgba(28,25,23,0.08);
   }
 
   .login-logo {
-    font-family: 'Fraunces', serif;
-    font-size: 28px;
-    color: var(--ink);
-    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
   }
-  .login-logo em { color: var(--accent); font-style: normal; }
+
+  .login-logo .logo-text { font-size: 28px; }
+
+  .login-card {
+    background: #242424;
+    border: 1px solid #333;
+    border-radius: 16px;
+    padding: 36px 32px;
+  }
+
+  .login-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+  }
 
   .login-sub {
-    font-size: 14px;
-    color: var(--muted);
-    font-weight: 300;
-    margin-bottom: 32px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 28px;
+    font-weight: 400;
   }
 
-  .form-group { margin-bottom: 20px; }
+  .form-group { margin-bottom: 18px; }
 
   .form-group label {
     display: block;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.7px;
-    color: var(--muted);
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.4);
     margin-bottom: 8px;
   }
 
   .form-group input,
   .form-group select {
     width: 100%;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 16px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    background: var(--bg);
-    color: var(--ink);
+    border: 1px solid #383838;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    background: #2E2E2E;
+    color: #fff;
     outline: none;
     transition: border-color 0.15s;
   }
 
-  .form-group input:focus,
-  .form-group select:focus {
-    border-color: var(--accent);
-    background: #fff;
-  }
+  .form-group input::placeholder { color: rgba(255,255,255,0.25); }
+  .form-group select option { background: #2E2E2E; }
 
-  .btn-primary {
+  .form-group input:focus,
+  .form-group select:focus { border-color: var(--pink); }
+
+  .btn-login {
     width: 100%;
-    background: var(--accent);
+    background: var(--pink);
     color: #fff;
     border: none;
-    border-radius: 10px;
-    padding: 14px;
-    font-family: 'DM Sans', sans-serif;
+    border-radius: 8px;
+    padding: 13px;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.15s;
     margin-top: 8px;
+    letter-spacing: -0.2px;
   }
-  .btn-primary:hover { background: #C94208; transform: translateY(-1px); }
-  .btn-primary:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+  .btn-login:hover { background: var(--pink-dk); transform: translateY(-1px); }
 
   .login-note {
     font-size: 12px;
-    color: var(--muted);
+    color: rgba(255,255,255,0.25);
     text-align: center;
     margin-top: 20px;
     line-height: 1.6;
@@ -170,149 +198,152 @@
 
   /* ── MAIN APP ── */
   #screen-app {
-    max-width: 760px;
+    max-width: 740px;
     margin: 0 auto;
-    padding: 40px 24px 80px;
+    padding: 36px 24px 80px;
   }
 
   .page-title {
-    font-family: 'Fraunces', serif;
-    font-size: 34px;
+    font-size: 30px;
+    font-weight: 700;
     letter-spacing: -1px;
-    margin-bottom: 6px;
-    line-height: 1.1;
+    margin-bottom: 4px;
+    line-height: 1.15;
   }
 
   .page-sub {
     font-size: 14px;
     color: var(--muted);
-    font-weight: 300;
-    margin-bottom: 32px;
+    font-weight: 400;
+    margin-bottom: 28px;
   }
 
   /* ── PERIOD BANNER ── */
   .period-banner {
-    background: var(--success-light);
-    border: 1px solid #BBF7D0;
-    border-radius: 12px;
-    padding: 14px 20px;
-    margin-bottom: 28px;
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin-bottom: 24px;
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--success-lt);
+    border: 1px solid #BBF7D0;
     color: var(--success);
   }
-
   .period-banner.closed {
-    background: #FFF7ED;
-    border-color: #FED7AA;
-    color: #C2410C;
+    background: var(--pink-lt);
+    border-color: #FECDD3;
+    color: var(--pink-dk);
   }
 
   /* ── CARD ── */
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    margin-bottom: 20px;
+    border-radius: 14px;
+    margin-bottom: 18px;
     overflow: hidden;
+    box-shadow: 0 1px 4px rgba(27,27,27,0.05);
   }
 
   .card-header {
-    padding: 18px 24px;
+    padding: 16px 22px;
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
   }
 
   .card-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 17px;
+    font-size: 16px;
     flex-shrink: 0;
   }
 
-  .icon-orange { background: var(--accent-light); }
-  .icon-indigo { background: var(--indigo-light); }
+  .icon-pink   { background: var(--pink-lt); }
+  .icon-purple { background: var(--purple-lt); }
 
   .card-header h2 {
-    font-family: 'Fraunces', serif;
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 700;
     letter-spacing: -0.3px;
   }
   .card-header p { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
-  .card-body { padding: 24px; }
+  .card-body { padding: 22px; }
 
-  /* ── FORM FIELDS ── */
-  .field { margin-bottom: 18px; }
+  /* ── FIELDS ── */
+  .field { margin-bottom: 16px; }
+
   .field label {
     display: block;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.7px;
+    letter-spacing: 0.8px;
     color: var(--muted);
-    margin-bottom: 7px;
+    margin-bottom: 6px;
   }
 
   .field select,
   .field input {
     width: 100%;
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 11px 14px;
-    font-family: 'DM Sans', sans-serif;
+    border-radius: 8px;
+    padding: 10px 13px;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 14px;
     background: var(--bg);
     color: var(--ink);
     outline: none;
     transition: border-color 0.15s;
+    font-weight: 400;
   }
 
   .field select:focus,
   .field input:focus {
-    border-color: var(--accent);
+    border-color: var(--pink);
     background: #fff;
   }
 
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
   .btn-add {
     width: 100%;
     background: none;
     border: 1.5px dashed var(--border);
-    border-radius: 10px;
-    padding: 12px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
+    border-radius: 8px;
+    padding: 11px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
     color: var(--muted);
     cursor: pointer;
     transition: all 0.15s;
     margin-top: 4px;
   }
   .btn-add:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: var(--accent-light);
+    border-color: var(--pink);
+    color: var(--pink);
+    background: var(--pink-lt);
   }
 
   /* ── ENTRY LIST ── */
-  .entry-list { margin-top: 16px; }
+  .entry-list { padding: 0 22px 8px; }
 
   .entry-item {
     background: var(--bg);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 16px;
-    margin-bottom: 8px;
+    border-radius: 9px;
+    padding: 11px 15px;
+    margin-bottom: 7px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -321,86 +352,50 @@
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-4px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { opacity:0; transform:translateY(-3px); }
+    to   { opacity:1; transform:translateY(0); }
   }
 
-  .entry-info .name { font-size: 14px; font-weight: 600; }
+  .entry-info .name  { font-size: 14px; font-weight: 600; }
   .entry-info .detail { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
-  .entry-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .entry-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
 
-  .entry-amount {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--accent);
-  }
-
-  .entry-amount.pts { color: var(--indigo); }
+  .entry-amount       { font-size:15px; font-weight:700; color:var(--pink); }
+  .entry-amount.pts   { color: var(--purple); }
 
   .btn-del {
     background: none;
     border: none;
     color: var(--border);
     cursor: pointer;
-    font-size: 14px;
-    width: 26px;
-    height: 26px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 13px;
+    width: 24px; height: 24px;
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
     transition: all 0.15s;
   }
-  .btn-del:hover { color: #DC2626; background: #FEF2F2; }
+  .btn-del:hover { color:#DC2626; background:#FEF2F2; }
 
   .empty-state {
     text-align: center;
     padding: 24px;
     color: var(--muted);
-    font-size: 14px;
+    font-size: 13px;
   }
 
   /* ── SUMMARY BAR ── */
   .summary-bar {
     background: var(--bg);
     border-top: 1px solid var(--border);
-    padding: 12px 24px;
+    padding: 11px 22px;
     display: flex;
     gap: 24px;
-    font-size: 13px;
+    font-size: 12px;
     color: var(--muted);
+    font-weight: 500;
   }
   .summary-bar strong { color: var(--ink); }
-
-  /* ── SUBMIT ── */
-  .submit-area {
-    margin-top: 28px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .btn-submit {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 14px 32px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .btn-submit:hover { background: #C94208; transform: translateY(-1px); }
-  .btn-submit:disabled { background: #ccc; cursor: not-allowed; transform: none; }
-
-  .btn-submit.indigo { background: var(--indigo); }
-  .btn-submit.indigo:hover { background: #3730A3; }
-
-  .submit-note { font-size: 13px; color: var(--muted); }
 
   /* ── COUNTRY TABS ── */
   .country-tabs {
@@ -410,9 +405,9 @@
   }
 
   .ctab {
-    padding: 11px 18px;
-    font-size: 13px;
-    font-weight: 500;
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 600;
     border: none;
     background: none;
     color: var(--muted);
@@ -420,37 +415,67 @@
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
     transition: all 0.15s;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
   .ctab:hover { color: var(--ink); }
-  .ctab.active { color: var(--accent); border-bottom-color: var(--accent); }
-  .ctab.indigo.active { color: var(--indigo); border-bottom-color: var(--indigo); }
+  .ctab.active       { color: var(--pink);   border-bottom-color: var(--pink); }
+  .ctab.purple.active { color: var(--purple); border-bottom-color: var(--purple); }
+
+  /* ── SUBMIT ── */
+  .submit-area {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn-submit {
+    background: var(--pink);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 13px 28px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: -0.2px;
+  }
+  .btn-submit:hover { background: var(--pink-dk); transform: translateY(-1px); }
+  .btn-submit:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+  .btn-submit.purple { background: var(--purple); color: var(--dark); }
+  .btn-submit.purple:hover { background: #9D91D6; }
+
+  .submit-note { font-size: 12px; color: var(--muted); }
 
   /* ── TOAST ── */
   .toast {
     position: fixed;
-    bottom: 28px;
-    right: 28px;
-    background: var(--ink);
+    bottom: 24px; right: 24px;
+    background: var(--dark);
     color: #fff;
-    padding: 14px 22px;
-    border-radius: 12px;
-    font-size: 14px;
+    padding: 13px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
     display: flex;
     align-items: center;
-    gap: 10px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    gap: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
     transform: translateY(80px);
     opacity: 0;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
     z-index: 999;
-    max-width: 360px;
+    border-left: 3px solid var(--pink);
   }
   .toast.show { transform: translateY(0); opacity: 1; }
 
-  /* ── LOADING ── */
   .spinner {
-    width: 18px; height: 18px;
+    width: 16px; height: 16px;
     border: 2px solid rgba(255,255,255,0.3);
     border-top-color: #fff;
     border-radius: 50%;
@@ -462,7 +487,7 @@
   @media (max-width: 560px) {
     header { padding: 0 16px; }
     #screen-app { padding: 24px 16px 60px; }
-    .login-card { padding: 32px 24px; }
+    .login-card { padding: 28px 20px; }
     .field-row { grid-template-columns: 1fr; }
   }
 </style>
@@ -471,57 +496,65 @@
 
 <!-- ══ HEADER ══ -->
 <header id="app-header" style="display:none;">
-  <div class="logo">apprecio<em>·</em></div>
+  <div class="pixel-logo">
+    <span class="logo-text">apprecio</span>
+  </div>
   <div class="header-right">
     <span class="period-indicator" id="header-period"></span>
     <span class="role-badge" id="header-role"></span>
   </div>
 </header>
 
-<!-- ══ SCREEN: LOGIN ══ -->
+<!-- ══ LOGIN ══ -->
 <div id="screen-login" class="screen active">
-  <div class="login-card">
-    <div class="login-logo">apprecio<em>·</em></div>
-    <div class="login-sub">Sistema de Nómina Mensual</div>
-
-    <div class="form-group">
-      <label>Tu email corporativo</label>
-      <input type="email" id="login-email" placeholder="nombre@apprecio.com" autocomplete="email">
+  <div class="login-wrap">
+    <div class="login-logo">
+      <span class="logo-text">apprecio</span>
     </div>
 
-    <div class="form-group">
-      <label>Rol</label>
-      <select id="login-rol">
-        <option value="">Selecciona tu rol...</option>
-        <option value="jefatura">Jefatura (Ingresos Variables)</option>
-        <option value="cultura">Cultura & Talento (Puntos)</option>
-      </select>
-    </div>
+    <div class="login-card">
+      <div class="login-title">Nómina Mensual</div>
+      <div class="login-sub">Ingresa para reportar las novedades del período.</div>
 
-    <button class="btn-primary" onclick="login()">Ingresar →</button>
+      <div class="form-group">
+        <label>Email corporativo</label>
+        <input type="email" id="login-email" placeholder="nombre@apprecio.com" autocomplete="email">
+      </div>
 
-    <div class="login-note">
-      Tu email se usará para identificar a tu equipo.<br>
-      Solo verás los colaboradores a tu cargo.
+      <div class="form-group">
+        <label>Rol</label>
+        <select id="login-rol">
+          <option value="">Selecciona tu rol...</option>
+          <option value="jefatura">Jefatura — Ingresos Variables</option>
+          <option value="cultura">Cultura & Talento — Puntos</option>
+        </select>
+      </div>
+
+      <button class="btn-login" onclick="login()">Ingresar →</button>
+
+      <div class="login-note">
+        Tu acceso está determinado por tu email corporativo.<br>
+        Solo verás la información correspondiente a tu rol.
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ══ SCREEN: APP ══ -->
+<!-- ══ APP ══ -->
 <div id="screen-app" class="screen">
 
   <div id="period-banner" class="period-banner">
     🟢 <span id="period-text">Cargando período...</span>
   </div>
 
-  <!-- ── JEFATURA VIEW ── -->
+  <!-- JEFATURA -->
   <div id="view-jefatura" style="display:none;">
-    <div class="page-title">Reporte de<br>Novedades Variables</div>
-    <p class="page-sub">Solo aparecen los colaboradores de tu equipo.</p>
+    <div class="page-title">Ingresos Variables</div>
+    <p class="page-sub">Solo aparecen los colaboradores a tu cargo.</p>
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon icon-orange">💼</div>
+        <div class="card-icon icon-pink">💼</div>
         <div>
           <h2>Agregar novedad</h2>
           <p>Comisiones y bonos del mes</p>
@@ -530,15 +563,11 @@
       <div class="card-body">
         <div class="field">
           <label>Mes del reporte</label>
-          <select id="jef-mes">
-            <option value="">Selecciona el mes...</option>
-          </select>
+          <select id="jef-mes"><option value="">Selecciona el mes...</option></select>
         </div>
         <div class="field">
           <label>Colaborador</label>
-          <select id="jef-colaborador">
-            <option value="">Cargando equipo...</option>
-          </select>
+          <select id="jef-colaborador"><option value="">Cargando equipo...</option></select>
         </div>
         <div class="field-row">
           <div class="field">
@@ -560,13 +589,10 @@
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon icon-orange">📋</div>
-        <div>
-          <h2>Novedades ingresadas</h2>
-          <p>Revisa antes de enviar</p>
-        </div>
+        <div class="card-icon icon-pink">📋</div>
+        <div><h2>Novedades ingresadas</h2><p>Revisa antes de enviar</p></div>
       </div>
-      <div class="entry-list" id="jef-lista" style="padding:0 24px 8px;">
+      <div class="entry-list" id="jef-lista">
         <div class="empty-state">Aún no has agregado novedades.</div>
       </div>
       <div class="summary-bar">
@@ -576,47 +602,38 @@
     </div>
 
     <div class="submit-area">
-      <button class="btn-submit" id="jef-btn-enviar" onclick="enviarJefatura()" disabled>
-        Enviar reporte
-      </button>
-      <span class="submit-note">Los datos se guardarán automáticamente en el sistema.</span>
+      <button class="btn-submit" id="jef-btn-enviar" onclick="enviarJefatura()" disabled>Enviar reporte</button>
+      <span class="submit-note">Los datos se guardarán automáticamente.</span>
     </div>
   </div>
 
-  <!-- ── CULTURA VIEW ── -->
+  <!-- CULTURA -->
   <div id="view-cultura" style="display:none;">
-    <div class="page-title">Reporte de<br>Puntos</div>
+    <div class="page-title">Puntos</div>
     <p class="page-sub">Ingresa los puntos del mes para toda la compañía.</p>
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon icon-indigo">⭐</div>
-        <div>
-          <h2>Agregar puntos</h2>
-          <p>1 punto = 1 unidad en moneda local · Sin conversión</p>
-        </div>
+        <div class="card-icon icon-purple">⭐</div>
+        <div><h2>Agregar puntos</h2><p>1 punto = 1 unidad en moneda local · Sin conversión</p></div>
       </div>
 
       <div class="country-tabs" id="cultura-tabs">
-        <button class="ctab indigo active" data-pais="Chile" onclick="cambiarPaisCultura(this)">🇨🇱 Chile</button>
-        <button class="ctab indigo" data-pais="Peru" onclick="cambiarPaisCultura(this)">🇵🇪 Perú</button>
-        <button class="ctab indigo" data-pais="Colombia" onclick="cambiarPaisCultura(this)">🇨🇴 Colombia</button>
-        <button class="ctab indigo" data-pais="Mexico" onclick="cambiarPaisCultura(this)">🇲🇽 México</button>
+        <button class="ctab purple active" data-pais="Chile"    onclick="cambiarPaisCultura(this)">🇨🇱 Chile</button>
+        <button class="ctab purple"        data-pais="Peru"     onclick="cambiarPaisCultura(this)">🇵🇪 Perú</button>
+        <button class="ctab purple"        data-pais="Colombia" onclick="cambiarPaisCultura(this)">🇨🇴 Colombia</button>
+        <button class="ctab purple"        data-pais="Mexico"   onclick="cambiarPaisCultura(this)">🇲🇽 México</button>
       </div>
 
       <div class="card-body">
         <div class="field-row">
           <div class="field">
             <label>Mes del reporte</label>
-            <select id="cul-mes">
-              <option value="">Selecciona el mes...</option>
-            </select>
+            <select id="cul-mes"><option value="">Selecciona el mes...</option></select>
           </div>
           <div class="field">
             <label>Colaborador</label>
-            <select id="cul-colaborador">
-              <option value="">Selecciona país primero...</option>
-            </select>
+            <select id="cul-colaborador"><option value="">Selecciona país primero...</option></select>
           </div>
         </div>
         <div class="field-row">
@@ -640,13 +657,10 @@
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon icon-indigo">📋</div>
-        <div>
-          <h2>Puntos ingresados</h2>
-          <p>Revisa antes de enviar</p>
-        </div>
+        <div class="card-icon icon-purple">📋</div>
+        <div><h2>Puntos ingresados</h2><p>Revisa antes de enviar</p></div>
       </div>
-      <div class="entry-list" id="cul-lista" style="padding:0 24px 8px;">
+      <div class="entry-list" id="cul-lista">
         <div class="empty-state">Aún no has agregado registros.</div>
       </div>
       <div class="summary-bar">
@@ -656,25 +670,27 @@
     </div>
 
     <div class="submit-area">
-      <button class="btn-submit indigo" id="cul-btn-enviar" onclick="enviarCultura()" disabled>
-        Enviar reporte de puntos
-      </button>
+      <button class="btn-submit purple" id="cul-btn-enviar" onclick="enviarCultura()" disabled>Enviar reporte de puntos</button>
       <span class="submit-note">Los datos se guardarán automáticamente.</span>
     </div>
   </div>
 
 </div>
 
-<!-- ══ TOAST ══ -->
-<div class="toast" id="toast">
-  <span id="toast-msg"></span>
-</div>
+<div class="toast" id="toast"><span id="toast-msg"></span></div>
 
 <script>
 // ══════════════════════════════════════════════
-//  CONFIGURACIÓN — edita estas variables
+//  CONFIG — NO EDITAR MANUALMENTE
 // ══════════════════════════════════════════════
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx7RApqRW83LQQiorA5-TEqJ6Vq-ipHyM472r_NchuJ3WaMYSsMBoprs-PaQLVrwh7S/exec';
+
+const PERIODO = {
+  mes:    'Marzo 2026',
+  inicio: '2026-03-01',
+  cierre: '2026-03-31',
+  abierto: true,
+};
 
 const EMAILS_CULTURA = [
   'asilva@apprecio.com',
@@ -682,16 +698,6 @@ const EMAILS_CULTURA = [
   'srojas@apprecio.com',
 ];
 
-// Período activo — edita cada mes
-const PERIODO = {
-  mes:    'Marzo 2025',
-  inicio: '2026-03-01',
-  cierre: '2026-03-31',
-  abierto: true,
-};
-
-// Equipo — copia aquí el listado desde tu hoja "Equipo"
-// Formato: { id: 'RUT/DNI', nombre: 'Nombre', pais: 'Chile', jefatura: 'email@apprecio.com' }
 const EQUIPO = [
 { id: '1192802547', nombre: 'Acuña Arevalo Kevin Manuel', pais: 'Colombia', jefatura: 'ivaldovinos@apprecio.com'},
 { id: '1022436929', nombre: 'Avila Herrera Aura Maria', pais: 'Colombia', jefatura: 'dindaburu@apprecio.com'},
@@ -790,11 +796,11 @@ const EQUIPO = [
 // ══════════════════════════════════════════════
 //  STATE
 // ══════════════════════════════════════════════
-let currentUser  = null;
-let currentRol   = null;
-let novedades    = [];
-let puntos       = [];
-let paisCultura  = 'Chile';
+let currentUser = null;
+let currentRol  = null;
+let novedades   = [];
+let puntos      = [];
+let paisCultura = 'Chile';
 
 // ══════════════════════════════════════════════
 //  INIT
@@ -808,7 +814,7 @@ function poblarMeses() {
   const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
                  'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
   const año = new Date().getFullYear();
-  const opts = meses.map((m,i) => `<option value="${m} ${año}" ${m+' '+año===PERIODO.mes?'selected':''}>${m} ${año}</option>`).join('');
+  const opts = meses.map(m => `<option value="${m} ${año}" ${m+' '+año===PERIODO.mes?'selected':''}>${m} ${año}</option>`).join('');
   document.getElementById('jef-mes').innerHTML = '<option value="">Selecciona el mes...</option>' + opts;
   document.getElementById('cul-mes').innerHTML = '<option value="">Selecciona el mes...</option>' + opts;
 }
@@ -825,7 +831,6 @@ function mostrarPeriodo() {
   } else {
     text.textContent = `Período abierto: ${PERIODO.mes} — cierra el ${cierre.toLocaleDateString('es-CL')}`;
   }
-
   document.getElementById('header-period').textContent = PERIODO.mes;
 }
 
@@ -839,6 +844,11 @@ function login() {
   if (!email || !email.includes('@')) { showToast('⚠️ Ingresa un email válido'); return; }
   if (!rol) { showToast('⚠️ Selecciona tu rol'); return; }
 
+  if (rol === 'cultura' && !EMAILS_CULTURA.includes(email)) {
+    showToast('⚠️ Tu email no tiene acceso al módulo de Cultura & Talento', 4000);
+    return;
+  }
+
   currentUser = email;
   currentRol  = rol;
 
@@ -847,14 +857,6 @@ function login() {
   document.getElementById('app-header').style.display = 'flex';
 
   const rolBadge = document.getElementById('header-role');
-
-if (rol === 'cultura' && !EMAILS_CULTURA.includes(email)) {
-  showToast('⚠️ Tu email no tiene acceso al módulo de Cultura & Talento', 4000);
-  btn.disabled = false;
-  btn.textContent = 'Ingresar →';
-  return;
-}
-
   if (rol === 'jefatura') {
     rolBadge.textContent = 'Jefatura';
     rolBadge.className = 'role-badge role-jefatura';
@@ -874,13 +876,11 @@ if (rol === 'cultura' && !EMAILS_CULTURA.includes(email)) {
 function cargarEquipoJefatura(email) {
   const miEquipo = EQUIPO.filter(c => c.jefatura.toLowerCase() === email.toLowerCase());
   const sel = document.getElementById('jef-colaborador');
-
   if (miEquipo.length === 0) {
-    sel.innerHTML = '<option value="">No se encontraron colaboradores para tu email</option>';
-    showToast('⚠️ No se encontraron colaboradores asignados a tu email', 4000);
+    sel.innerHTML = '<option value="">No hay colaboradores asignados a tu email</option>';
+    showToast('⚠️ No se encontraron colaboradores para tu email', 4000);
     return;
   }
-
   sel.innerHTML = '<option value="">-- Selecciona colaborador --</option>' +
     miEquipo.map(c => `<option value='${JSON.stringify(c)}'>${c.nombre} · ${c.pais}</option>`).join('');
 }
@@ -900,16 +900,16 @@ function cambiarPaisCultura(btn) {
 }
 
 // ══════════════════════════════════════════════
-//  JEFATURA — NOVEDADES
+//  JEFATURA
 // ══════════════════════════════════════════════
 function agregarNovedad() {
-  const mes   = document.getElementById('jef-mes').value;
+  const mes    = document.getElementById('jef-mes').value;
   const colRaw = document.getElementById('jef-colaborador').value;
-  const desc  = document.getElementById('jef-desc').value;
-  const monto = parseFloat(document.getElementById('jef-monto').value);
+  const desc   = document.getElementById('jef-desc').value;
+  const monto  = parseFloat(document.getElementById('jef-monto').value);
 
-  if (!mes)    { showToast('⚠️ Selecciona el mes'); return; }
-  if (!colRaw) { showToast('⚠️ Selecciona un colaborador'); return; }
+  if (!mes)             { showToast('⚠️ Selecciona el mes'); return; }
+  if (!colRaw)          { showToast('⚠️ Selecciona un colaborador'); return; }
   if (!monto || monto <= 0) { showToast('⚠️ Ingresa un monto válido'); return; }
 
   const col = JSON.parse(colRaw);
@@ -940,16 +940,12 @@ function renderNovedades() {
       </div>`).join('');
     btn.disabled = false;
   }
-
   const total = novedades.reduce((s,n) => s + n.monto, 0);
   document.getElementById('jef-count').textContent = novedades.length;
   document.getElementById('jef-total').textContent = total.toLocaleString('es-CL');
 }
 
-function eliminarNovedad(i) {
-  novedades.splice(i, 1);
-  renderNovedades();
-}
+function eliminarNovedad(i) { novedades.splice(i,1); renderNovedades(); }
 
 async function enviarJefatura() {
   if (novedades.length === 0) return;
@@ -963,14 +959,9 @@ async function enviarJefatura() {
       email: currentUser,
       timestamp: new Date().toISOString(),
       novedades: novedades.map(n => ({
-        mes:        n.mes,
-        pais:       n.col.pais,
-        rut:        n.col.id,
-        nombre:     n.col.nombre,
-        tipo:       n.tipo,
-        descripcion: n.desc,
-        monto:      n.monto,
-        jefatura:   currentUser,
+        mes: n.mes, pais: n.col.pais, rut: n.col.id,
+        nombre: n.col.nombre, tipo: n.tipo,
+        descripcion: n.desc, monto: n.monto, jefatura: currentUser,
       }))
     };
 
@@ -993,7 +984,7 @@ async function enviarJefatura() {
 }
 
 // ══════════════════════════════════════════════
-//  CULTURA — PUNTOS
+//  CULTURA
 // ══════════════════════════════════════════════
 function agregarPuntos() {
   const mes    = document.getElementById('cul-mes').value;
@@ -1001,9 +992,9 @@ function agregarPuntos() {
   const tipo   = document.getElementById('cul-tipo').value;
   const pts    = parseInt(document.getElementById('cul-puntos').value);
 
-  if (!mes)    { showToast('⚠️ Selecciona el mes'); return; }
-  if (!colRaw) { showToast('⚠️ Selecciona un colaborador'); return; }
-  if (!pts || pts <= 0) { showToast('⚠️ Ingresa una cantidad válida'); return; }
+  if (!mes)           { showToast('⚠️ Selecciona el mes'); return; }
+  if (!colRaw)        { showToast('⚠️ Selecciona un colaborador'); return; }
+  if (!pts || pts<=0) { showToast('⚠️ Ingresa una cantidad válida'); return; }
 
   const col = JSON.parse(colRaw);
   puntos.push({ mes, col, tipo, pts });
@@ -1033,16 +1024,12 @@ function renderPuntos() {
       </div>`).join('');
     btn.disabled = false;
   }
-
   const total = puntos.reduce((s,p) => s + p.pts, 0);
   document.getElementById('cul-count').textContent = puntos.length;
   document.getElementById('cul-total').textContent = total.toLocaleString('es-CL');
 }
 
-function eliminarPunto(i) {
-  puntos.splice(i, 1);
-  renderPuntos();
-}
+function eliminarPunto(i) { puntos.splice(i,1); renderPuntos(); }
 
 async function enviarCultura() {
   if (puntos.length === 0) return;
@@ -1056,12 +1043,8 @@ async function enviarCultura() {
       email: currentUser,
       timestamp: new Date().toISOString(),
       puntos: puntos.map(p => ({
-        mes:    p.mes,
-        pais:   p.col.pais,
-        rut:    p.col.id,
-        nombre: p.col.nombre,
-        tipo:   p.tipo,
-        puntos: p.pts,
+        mes: p.mes, pais: p.col.pais, rut: p.col.id,
+        nombre: p.col.nombre, tipo: p.tipo, puntos: p.pts,
       }))
     };
 
@@ -1086,7 +1069,7 @@ async function enviarCultura() {
 // ══════════════════════════════════════════════
 //  UTILS
 // ══════════════════════════════════════════════
-function showToast(msg, dur = 2800) {
+function showToast(msg, dur=2800) {
   const t = document.getElementById('toast');
   document.getElementById('toast-msg').textContent = msg;
   t.classList.add('show');
