@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apprecio · Nómina</title>
+<title>Apprecio · Nomina</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -513,8 +513,8 @@
     </div>
 
     <div class="login-card">
-      <div class="login-title">Nómina Mensual</div>
-      <div class="login-sub">Ingresa para reportar las novedades del período.</div>
+      <div class="login-title">Nomina Mensual</div>
+      <div class="login-sub">Ingresa para reportar las novedades del periodo.</div>
 
       <div class="form-group">
         <label>Email corporativo</label>
@@ -533,8 +533,8 @@
       <button class="btn-login" onclick="login()">Ingresar →</button>
 
       <div class="login-note">
-        Tu acceso está determinado por tu email corporativo.<br>
-        Solo verás la información correspondiente a tu rol.
+        Tu acceso esta determinado por tu email corporativo.<br>
+        Solo veras la informacion correspondiente a tu rol.
       </div>
     </div>
   </div>
@@ -544,7 +544,7 @@
 <div id="screen-app" class="screen">
 
   <div id="period-banner" class="period-banner">
-    🟢 <span id="period-text">Cargando período...</span>
+    🟢 <span id="period-text">Cargando periodo...</span>
   </div>
 
   <!-- JEFATURA -->
@@ -571,7 +571,7 @@
         </div>
         <div class="field-row">
           <div class="field">
-            <label>Descripción</label>
+            <label>Descripcion</label>
             <select id="jef-desc">
               <option value="Bono Rewards">Bono Rewards</option>
               <option value="Bono Fee">Bono Fee</option>
@@ -593,7 +593,7 @@
         <div><h2>Novedades ingresadas</h2><p>Revisa antes de enviar</p></div>
       </div>
       <div class="entry-list" id="jef-lista">
-        <div class="empty-state">Aún no has agregado novedades.</div>
+        <div class="empty-state">Aun no has agregado novedades.</div>
       </div>
       <div class="summary-bar">
         <span>Registros: <strong id="jef-count">0</strong></span>
@@ -603,26 +603,26 @@
 
     <div class="submit-area">
       <button class="btn-submit" id="jef-btn-enviar" onclick="enviarJefatura()" disabled>Enviar reporte</button>
-      <span class="submit-note">Los datos se guardarán automáticamente.</span>
+      <span class="submit-note">Los datos se guardaran automaticamente.</span>
     </div>
   </div>
 
   <!-- CULTURA -->
   <div id="view-cultura" style="display:none;">
     <div class="page-title">Puntos</div>
-    <p class="page-sub">Ingresa los puntos del mes para toda la compañía.</p>
+    <p class="page-sub">Ingresa los puntos del mes para toda la compañia.</p>
 
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-purple">⭐</div>
-        <div><h2>Agregar puntos</h2><p>1 punto = 1 unidad en moneda local · Sin conversión</p></div>
+        <div><h2>Agregar puntos</h2><p>1 punto = 1 unidad en moneda local · Sin conversion</p></div>
       </div>
 
       <div class="country-tabs" id="cultura-tabs">
         <button class="ctab purple active" data-pais="Chile"    onclick="cambiarPaisCultura(this)">🇨🇱 Chile</button>
-        <button class="ctab purple"        data-pais="Peru"     onclick="cambiarPaisCultura(this)">🇵🇪 Perú</button>
+        <button class="ctab purple"        data-pais="Peru"     onclick="cambiarPaisCultura(this)">🇵🇪 Peru</button>
         <button class="ctab purple"        data-pais="Colombia" onclick="cambiarPaisCultura(this)">🇨🇴 Colombia</button>
-        <button class="ctab purple"        data-pais="Mexico"   onclick="cambiarPaisCultura(this)">🇲🇽 México</button>
+        <button class="ctab purple"        data-pais="Mexico"   onclick="cambiarPaisCultura(this)">🇲🇽 Mexico</button>
       </div>
 
       <div class="card-body">
@@ -633,7 +633,7 @@
           </div>
           <div class="field">
             <label>Colaborador</label>
-            <select id="cul-colaborador"><option value="">Selecciona país primero...</option></select>
+            <select id="cul-colaborador"><option value="">Selecciona pais primero...</option></select>
           </div>
         </div>
         <div class="field-row">
@@ -661,7 +661,7 @@
         <div><h2>Puntos ingresados</h2><p>Revisa antes de enviar</p></div>
       </div>
       <div class="entry-list" id="cul-lista">
-        <div class="empty-state">Aún no has agregado registros.</div>
+        <div class="empty-state">Aun no has agregado registros.</div>
       </div>
       <div class="summary-bar">
         <span>Registros: <strong id="cul-count">0</strong></span>
@@ -671,7 +671,7 @@
 
     <div class="submit-area">
       <button class="btn-submit purple" id="cul-btn-enviar" onclick="enviarCultura()" disabled>Enviar reporte de puntos</button>
-      <span class="submit-note">Los datos se guardarán automáticamente.</span>
+      <span class="submit-note">Los datos se guardaran automaticamente.</span>
     </div>
   </div>
 
@@ -715,19 +715,19 @@ const EQUIPO = [
 { id: '1019092022', nombre: 'Ruiz Galeano Julieth Katherine', pais: 'Colombia', jefatura: 'ivaldovinos@apprecio.com'},
 { id: '52792764', nombre: 'Silva Vega Magda Carolina', pais: 'Colombia', jefatura: 'dindaburu@apprecio.com'},
 { id: '1001161038', nombre: 'Vera Cordero Wilder Andres', pais: 'Colombia', jefatura: 'ivaldovinos@apprecio.com'},
-{ id: '47578962', nombre: 'Alvarado Herrera Samuel Elias', pais: 'Perú', jefatura: 'kli@apprecio.com'},
-{ id: '73863888', nombre: 'Cotrina Mesias Jose Alejandro', pais: 'Perú', jefatura: 'mperez@apprecio.com'},
-{ id: '44845963', nombre: 'Duran Urquiaga De Lopez Diana Carolina', pais: 'Perú', jefatura: 'kli@apprecio.com'},
-{ id: '45464858', nombre: 'Guerra Vela Joao Junior', pais: 'Perú', jefatura: 'kli@apprecio.com'},
-{ id: '42701827', nombre: 'Li Kam Katia Cristina', pais: 'Perú', jefatura: 'srojas@apprecio.com', comercial: true },
-{ id: '72624430', nombre: 'Maya Velarde Francis Alexander', pais: 'Perú', jefatura: 'kli@apprecio.com'},
-{ id: '70207293', nombre: 'Mendoza Tirado Adriana Delia', pais: 'Perú', jefatura: 'kli@apprecio.com'},
-{ id: '42655079', nombre: 'Moreno Gomez Cesar Antonio Aaron', pais: 'Perú', jefatura: 'ivaldovinos@apprecio.com'},
-{ id: '41151019', nombre: 'Rivarola Castro Karina Jeanette', pais: 'Perú', jefatura: 'jceballos@apprecio.com'},
-{ id: '75985238', nombre: 'Roldan Salazar Diana Lucia', pais: 'Perú', jefatura: 'sgajardo@apprecio.com', comercial: true },
-{ id: '46396824', nombre: 'Sernaqué Amaya Magda', pais: 'Perú', jefatura: 'kli@apprecio.com'},
-{ id: '47330946', nombre: 'Serquen Campos Kewin Daniel', pais: 'Perú', jefatura: 'jleiva@apprecio.com'},
-{ id: '74873591', nombre: 'Villavicencio Mendez Melanie Daphnne', pais: 'Perú', jefatura: 'kli@apprecio.com'},
+{ id: '47578962', nombre: 'Alvarado Herrera Samuel Elias', pais: 'Peru', jefatura: 'kli@apprecio.com'},
+{ id: '73863888', nombre: 'Cotrina Mesias Jose Alejandro', pais: 'Peru', jefatura: 'mperez@apprecio.com'},
+{ id: '44845963', nombre: 'Duran Urquiaga De Lopez Diana Carolina', pais: 'Peru', jefatura: 'kli@apprecio.com'},
+{ id: '45464858', nombre: 'Guerra Vela Joao Junior', pais: 'Peru', jefatura: 'kli@apprecio.com'},
+{ id: '42701827', nombre: 'Li Kam Katia Cristina', pais: 'Peru', jefatura: 'srojas@apprecio.com', comercial: true },
+{ id: '72624430', nombre: 'Maya Velarde Francis Alexander', pais: 'Peru', jefatura: 'kli@apprecio.com'},
+{ id: '70207293', nombre: 'Mendoza Tirado Adriana Delia', pais: 'Peru', jefatura: 'kli@apprecio.com'},
+{ id: '42655079', nombre: 'Moreno Gomez Cesar Antonio Aaron', pais: 'Peru', jefatura: 'ivaldovinos@apprecio.com'},
+{ id: '41151019', nombre: 'Rivarola Castro Karina Jeanette', pais: 'Peru', jefatura: 'jceballos@apprecio.com'},
+{ id: '75985238', nombre: 'Roldan Salazar Diana Lucia', pais: 'Peru', jefatura: 'sgajardo@apprecio.com', comercial: true },
+{ id: '46396824', nombre: 'Sernaque Amaya Magda', pais: 'Peru', jefatura: 'kli@apprecio.com'},
+{ id: '47330946', nombre: 'Serquen Campos Kewin Daniel', pais: 'Peru', jefatura: 'jleiva@apprecio.com'},
+{ id: '74873591', nombre: 'Villavicencio Mendez Melanie Daphnne', pais: 'Peru', jefatura: 'kli@apprecio.com'},
 { id: '17.023.228-3', nombre: 'Agliati Quezada Alvaro', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
 { id: '15.065.556-0', nombre: 'Ahumada Margery Ivonne Del Pilar', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
 { id: '20.009.204-k', nombre: 'Albrecht Cofre Valentina Paz', pais: 'Chile', jefatura: 'mperez@apprecio.com'},
@@ -735,29 +735,29 @@ const EQUIPO = [
 { id: '25.476.024-2', nombre: 'Alvarado Mendoza Nayrim Mercedes', pais: 'Chile', jefatura: 'mperez@apprecio.com'},
 { id: '16.921.127-2', nombre: 'Ayala Maturana Camilo Andres', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
 { id: '20.435.372-7', nombre: 'Bahamondes Guerrero Paulina Lilian', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
-{ id: '18.092.760-3', nombre: 'Bulnes Paulsen Leandro Elías', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
+{ id: '18.092.760-3', nombre: 'Bulnes Paulsen Leandro Elias', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
 { id: '24.639.458-k', nombre: 'Calzada Martinez Lady Johanna', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
 { id: '19.636.548-6', nombre: 'Camus Solari Esteban Eduardo', pais: 'Chile', jefatura: 'sgajardo@apprecio.com', comercial: true },
-{ id: '18.308.937-4', nombre: 'Canto Pizarro Sebastián Elías', pais: 'Chile', jefatura: 'srodriguez@apprecio.com'},
-{ id: '16.030.138-4', nombre: 'Cárcamo Durán Verónica Franchesca', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
-{ id: '19.668.643-6', nombre: 'Castro Pizarro Benjamín Alejandro', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
+{ id: '18.308.937-4', nombre: 'Canto Pizarro Sebastian Elias', pais: 'Chile', jefatura: 'srodriguez@apprecio.com'},
+{ id: '16.030.138-4', nombre: 'Carcamo Duran Veronica Franchesca', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
+{ id: '19.668.643-6', nombre: 'Castro Pizarro Benjamin Alejandro', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
 { id: '18.615.891-1', nombre: 'Castro Saavedra Catherine Paola', pais: 'Chile', jefatura: 'srodriguez@apprecio.com'},
 { id: '13.724.324-5', nombre: 'Ceballos Argo Juan Ignacio', pais: 'Chile', jefatura: 'jvillatoro@apprecio.com'},
 { id: '13.211.835-3', nombre: 'Cid Zapata Alejandro Andres', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
 { id: '17.681.917-0', nombre: 'Conte Marza Fabian Alejandro', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
 { id: '18.774.341-9', nombre: 'Contreras Romero Javiera Constanza', pais: 'Chile', jefatura: 'mperez@apprecio.com'},
 { id: '19.033.293-4', nombre: 'DAngelo Soto Stephanie Andrea', pais: 'Chile', jefatura: 'jvillatoro@apprecio.com'},
-{ id: '17.269.619-8', nombre: 'Dominguez Feliú Maria Ignacia', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
-{ id: '18.127.278-3', nombre: 'Escobar Rosales Sebastián Alejandro', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
-{ id: '18.243.626-7', nombre: 'Fierro Alarcón Nicole Alejandra', pais: 'Chile', jefatura: 'ivaldovinos@apprecio.com'},
+{ id: '17.269.619-8', nombre: 'Dominguez Feliu Maria Ignacia', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
+{ id: '18.127.278-3', nombre: 'Escobar Rosales Sebastian Alejandro', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
+{ id: '18.243.626-7', nombre: 'Fierro Alarcon Nicole Alejandra', pais: 'Chile', jefatura: 'ivaldovinos@apprecio.com'},
 { id: '19.889.819-8', nombre: 'Figueroa Mackenna Camilo', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
 { id: '26.053.148-4', nombre: 'Figueroa Ramos Fabricio Rafael', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
 { id: '17.982.829-4', nombre: 'Gajardo Feuerhake Sebastian', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
-{ id: '19.991.596-7', nombre: 'González Llanca Nataly Alessandra', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
-{ id: '20.077.642-9', nombre: 'González Riveros Benjamín Andrés', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
+{ id: '19.991.596-7', nombre: 'Gonzalez Llanca Nataly Alessandra', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
+{ id: '20.077.642-9', nombre: 'Gonzalez Riveros Benjamin Andres', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
 { id: '20.297.991-2', nombre: 'Gutierrez Poblete Marcelo Andres', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
 { id: '18.635.332-3', nombre: 'Hinojosa Lenck Diego', pais: 'Chile', jefatura: 'mperez@apprecio.com'},
-{ id: '19.639.035-9', nombre: 'Jamasmie Chávarri Lorenzo Angel', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
+{ id: '19.639.035-9', nombre: 'Jamasmie Chavarri Lorenzo Angel', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
 { id: '18.828.893-6', nombre: 'Jara Jara Nicolas Javier', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
 { id: '19.341.795-7', nombre: 'Jeria Serey Gonzalo Antonio', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
 { id: '12.844.965-5', nombre: 'Leighton Monsalvez Johan Andres', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
@@ -765,31 +765,31 @@ const EQUIPO = [
 { id: '18.739.997-1', nombre: 'Maldonado Carvajal Juliette Vanessa', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
 { id: '18.165.569-0', nombre: 'Molina Pinchart Ignacio Enrique', pais: 'Chile', jefatura: 'srodriguez@apprecio.com'},
 { id: '19.606.285-8', nombre: 'Obilinovic Leon Esteban Andres', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
-{ id: '20.390.046-5', nombre: 'Osorio Paicil Bayron Saúl', pais: 'Chile', jefatura: 'sgajardo@apprecio.com', comercial: true },
+{ id: '20.390.046-5', nombre: 'Osorio Paicil Bayron Saul', pais: 'Chile', jefatura: 'sgajardo@apprecio.com', comercial: true },
 { id: '21.265.837-5', nombre: 'Parancan Flores Carmen Gloria', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
-{ id: '13.257.196-1', nombre: 'Pérez Labarca Ana Marcela', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
-{ id: '15.355.386-6', nombre: 'Pérez Lazo Daniel Edgardo', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
+{ id: '13.257.196-1', nombre: 'Perez Labarca Ana Marcela', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
+{ id: '15.355.386-6', nombre: 'Perez Lazo Daniel Edgardo', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
 { id: '13.049.587-7', nombre: 'Petrasic Roa Daniel Antonio', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
 { id: '10.496.694-2', nombre: 'Ramirez Gonzales Patricia Teresa', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
 { id: '16.277.467-0', nombre: 'Rocco Salgado Cristian Francisco', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
 { id: '15.563.184-8', nombre: 'Rojas Chamy Sebastian Ricardo', pais: 'Chile', jefatura: 'jvillatoro@apprecio.com', comercial: true },
 { id: '16.490.488-1', nombre: 'Saez Saavedra Carlos Antonio', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
-{ id: '16.939.271-4', nombre: 'Silva Moya Ana María', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
+{ id: '16.939.271-4', nombre: 'Silva Moya Ana Maria', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
 { id: '15.541.420-0', nombre: 'Soto Basualto Paulina Andrea', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
 { id: '18.760.734-5', nombre: 'Soto Retamales Thomas Ignacio', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
 { id: '28.769.769-4', nombre: 'Tan Tanaka Kelly Milagros', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
 { id: '19.008.290-3', nombre: 'Torres Alves Maria Fernanda', pais: 'Chile', jefatura: 'sgajardo@apprecio.com', comercial: true },
 { id: '15.594.194-4', nombre: 'Valdivia Cepeda Cristian Rodrigo', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
-{ id: '16.207.707-4', nombre: 'Valdovinos Jofré Luis Ignacio', pais: 'Chile', jefatura: 'jvillatoro@apprecio.com'},
+{ id: '16.207.707-4', nombre: 'Valdovinos Jofre Luis Ignacio', pais: 'Chile', jefatura: 'jvillatoro@apprecio.com'},
 { id: '15.936.701-0', nombre: 'Valenzuela Peñaloza Constanza Andrea', pais: 'Chile', jefatura: 'mperez@apprecio.com'},
 { id: '17.564.024-k', nombre: 'Venegas Silva Ruben Esteban', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
 { id: '19.634.652-k', nombre: 'Vergara Solis Giovanni Alejandro', pais: 'Chile', jefatura: 'jceballos@apprecio.com'},
-{ id: '12.950.985-6', nombre: 'Villalón Baxter Pablo', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
+{ id: '12.950.985-6', nombre: 'Villalon Baxter Pablo', pais: 'Chile', jefatura: 'jleighton@apprecio.com'},
 { id: '12.605.423-8', nombre: 'Villatoro Gonzalez Jaime Andres', pais: 'Chile', jefatura: 'jvillatoro@apprecio.com'},
-{ id: 'OEGG930125PN6', nombre: 'Olvera Gil Giovanny', pais: 'México', jefatura: 'jvalencia@dcanje.com'},
-{ id: 'TEMJ960605KH7', nombre: 'Tejada Melchor Jessica Mariana', pais: 'México', jefatura: 'jvalencia@dcanje.com'},
-{ id: 'TUCR841111D54', nombre: 'Trujillo Cruz Rosa Colombina', pais: 'México', jefatura: 'jvalencia@dcanje.com'},
-{ id: 'VARJ890507TD1', nombre: 'Valencia Rivera Juan Camilo', pais: 'México', jefatura: 'srojas@apprecio.com', comercial: true },
+{ id: 'OEGG930125PN6', nombre: 'Olvera Gil Giovanny', pais: 'Mexico', jefatura: 'jvalencia@dcanje.com'},
+{ id: 'TEMJ960605KH7', nombre: 'Tejada Melchor Jessica Mariana', pais: 'Mexico', jefatura: 'jvalencia@dcanje.com'},
+{ id: 'TUCR841111D54', nombre: 'Trujillo Cruz Rosa Colombina', pais: 'Mexico', jefatura: 'jvalencia@dcanje.com'},
+{ id: 'VARJ890507TD1', nombre: 'Valencia Rivera Juan Camilo', pais: 'Mexico', jefatura: 'srojas@apprecio.com', comercial: true },
 ];
 // ══════════════════════════════════════════════
 //  STATE
@@ -825,9 +825,9 @@ function mostrarPeriodo() {
 
   if (!PERIODO.abierto || hoy > cierre) {
     banner.classList.add('closed');
-    text.textContent = `Período ${PERIODO.mes} cerrado.`;
+    text.textContent = `Periodo ${PERIODO.mes} cerrado.`;
   } else {
-    text.textContent = `Período abierto: ${PERIODO.mes} — cierra el ${cierre.toLocaleDateString('es-CL')}`;
+    text.textContent = `Periodo abierto: ${PERIODO.mes} — cierra el ${cierre.toLocaleDateString('es-CL')}`;
   }
   document.getElementById('header-period').textContent = PERIODO.mes;
 }
@@ -839,11 +839,11 @@ function login() {
   const email = document.getElementById('login-email').value.trim().toLowerCase();
   const rol   = document.getElementById('login-rol').value;
 
-  if (!email || !email.includes('@')) { showToast('⚠️ Ingresa un email válido'); return; }
+  if (!email || !email.includes('@')) { showToast('⚠️ Ingresa un email valido'); return; }
   if (!rol) { showToast('⚠️ Selecciona tu rol'); return; }
 
   if (rol === 'cultura' && !EMAILS_CULTURA.includes(email)) {
-    showToast('⚠️ Tu email no tiene acceso al módulo de Cultura & Talento', 4000);
+    showToast('⚠️ Tu email no tiene acceso al modulo de Cultura & Talento', 4000);
     return;
   }
 
@@ -908,10 +908,10 @@ function agregarNovedad() {
 
   if (!mes)             { showToast('⚠️ Selecciona el mes'); return; }
   if (!colRaw)          { showToast('⚠️ Selecciona un colaborador'); return; }
-  if (!monto || monto <= 0) { showToast('⚠️ Ingresa un monto válido'); return; }
+  if (!monto || monto <= 0) { showToast('⚠️ Ingresa un monto valido'); return; }
 
   const col = JSON.parse(colRaw);
-  novedades.push({ mes, col, tipo: 'Comisión/Bono', desc, monto });
+  novedades.push({ mes, col, tipo: 'Comision/Bono', desc, monto });
   document.getElementById('jef-monto').value = '';
   renderNovedades();
   showToast('✅ Novedad agregada');
@@ -922,7 +922,7 @@ function renderNovedades() {
   const btn   = document.getElementById('jef-btn-enviar');
 
   if (novedades.length === 0) {
-    lista.innerHTML = '<div class="empty-state">Aún no has agregado novedades.</div>';
+    lista.innerHTML = '<div class="empty-state">Aun no has agregado novedades.</div>';
     btn.disabled = true;
   } else {
     lista.innerHTML = novedades.map((n,i) => `
@@ -992,7 +992,7 @@ function agregarPuntos() {
 
   if (!mes)           { showToast('⚠️ Selecciona el mes'); return; }
   if (!colRaw)        { showToast('⚠️ Selecciona un colaborador'); return; }
-  if (!pts || pts<=0) { showToast('⚠️ Ingresa una cantidad válida'); return; }
+  if (!pts || pts<=0) { showToast('⚠️ Ingresa una cantidad valida'); return; }
 
   const col = JSON.parse(colRaw);
   puntos.push({ mes, col, tipo, pts });
@@ -1006,7 +1006,7 @@ function renderPuntos() {
   const btn   = document.getElementById('cul-btn-enviar');
 
   if (puntos.length === 0) {
-    lista.innerHTML = '<div class="empty-state">Aún no has agregado registros.</div>';
+    lista.innerHTML = '<div class="empty-state">Aun no has agregado registros.</div>';
     btn.disabled = true;
   } else {
     lista.innerHTML = puntos.map((p,i) => `
