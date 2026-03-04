@@ -980,7 +980,7 @@ async function enviarJefatura() {
       novedades: novedades.map(n => ({
         mes: n.mes, pais: n.col.pais, rut: n.col.id,
         nombre: n.col.nombre, tipo: n.tipo,
-        descripcion: n.desc, monto: n.monto, jefatura: currentUser,
+        descripcion: n.desc, monto: n.monto, comentario: n.comentario || '', jefatura: currentUser,
       }))
     };
 
