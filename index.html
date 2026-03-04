@@ -676,12 +676,17 @@
 // ══════════════════════════════════════════════
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx7RApqRW83LQQiorA5-TEqJ6Vq-ipHyM472r_NchuJ3WaMYSsMBoprs-PaQLVrwh7S/exec';
 
+const EMAILS_CULTURA = [
+  'asilva@apprecio.com',
+  'jceballos@apprecio.com',
+  'srojas@apprecio.com',
+];
 
 // Período activo — edita cada mes
 const PERIODO = {
   mes:    'Marzo 2025',
-  inicio: '2025-03-01',
-  cierre: '2025-03-31',
+  inicio: '2026-03-01',
+  cierre: '2026-03-31',
   abierto: true,
 };
 
@@ -842,6 +847,14 @@ function login() {
   document.getElementById('app-header').style.display = 'flex';
 
   const rolBadge = document.getElementById('header-role');
+
+if (rol === 'cultura' && !EMAILS_CULTURA.includes(email)) {
+  showToast('⚠️ Tu email no tiene acceso al módulo de Cultura & Talento', 4000);
+  btn.disabled = false;
+  btn.textContent = 'Ingresar →';
+  return;
+}
+
   if (rol === 'jefatura') {
     rolBadge.textContent = 'Jefatura';
     rolBadge.className = 'role-badge role-jefatura';
