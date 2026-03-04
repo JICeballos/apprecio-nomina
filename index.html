@@ -762,6 +762,7 @@ const EQUIPO = [
 { id: '19.341.795-7', nombre: 'Jeria Serey Gonzalo Antonio', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
 { id: '12.844.965-5', nombre: 'Leighton Monsalvez Johan Andres', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
 { id: '16.799.938-7', nombre: 'Leiva Navarro Emanuel Jesus', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
+{ id: '18.739.997-1', nombre: 'Maldonado Carvajal Juliette Vanessa', pais: 'Chile', jefatura: 'srojas@apprecio.com', comercial: true },
 { id: '18.165.569-0', nombre: 'Molina Pinchart Ignacio Enrique', pais: 'Chile', jefatura: 'srodriguez@apprecio.com'},
 { id: '19.606.285-8', nombre: 'Obilinovic Leon Esteban Andres', pais: 'Chile', jefatura: 'jleiva@apprecio.com'},
 { id: '20.390.046-5', nombre: 'Osorio Paicil Bayron Saul', pais: 'Chile', jefatura: 'sgajardo@apprecio.com', comercial: true },
@@ -870,6 +871,20 @@ function login() {
 // ══════════════════════════════════════════════
 //  EQUIPO
 // ══════════════════════════════════════════════
+function actualizarDescripciones(colRaw) {
+  const sel = document.getElementById('jef-desc');
+  if (!colRaw) return;
+  const col = JSON.parse(colRaw);
+  if (col.comercial === true) {
+    sel.innerHTML = `
+      <option value="Bono Rewards">Bono Rewards</option>
+      <option value="Bono Fee">Bono Fee</option>
+      <option value="Bono Excepcional">Bono Excepcional</option>`;
+  } else {
+    sel.innerHTML = '<option value="Bono Excepcional">Bono Excepcional</option>';
+  }
+}
+
 function cargarEquipoJefatura(email) {
   const miEquipo = EQUIPO.filter(c => c.jefatura.toLowerCase() === email.toLowerCase());
   const sel = document.getElementById('jef-colaborador');
@@ -878,8 +893,9 @@ function cargarEquipoJefatura(email) {
     showToast('⚠️ No se encontraron colaboradores para tu email', 4000);
     return;
   }
-  sel.innerHTML = '<option value="">-- Selecciona colaborador --</option>' +
+sel.innerHTML = '<option value="">-- Selecciona colaborador --</option>' +
     miEquipo.map(c => `<option value='${JSON.stringify(c)}'>${c.nombre} · ${c.pais}</option>`).join('');
+  sel.onchange = function() { actualizarDescripciones(this.value); };
 }
 
 function cargarEquipoCultura(pais) {
