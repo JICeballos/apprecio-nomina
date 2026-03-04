@@ -946,34 +946,33 @@ async function enviarJefatura() {
 
   try {
     const payload = {
+      tipo: 'variables',
       email: currentUser,
       timestamp: new Date().toISOString(),
       novedades: novedades.map(n => ({
-        mes:        n.mes,
-        pais:       n.col.pais,
-        rut:        n.col.id,
-        nombre:     n.col.nombre,
-        tipo:       n.tipo,
+        mes:         n.mes,
+        pais:        n.col.pais,
+        rut:         n.col.id,
+        nombre:      n.col.nombre,
+        tipo:        n.tipo,
         descripcion: n.desc,
-        monto:      n.monto,
-        jefatura:   currentUser,
+        monto:       n.monto,
+        jefatura:    currentUser,
       }))
     };
 
-    const resp = await fetch(N8N_WEBHOOK_JEFATURA, {
+    await fetch(N8N_WEBHOOK_JEFATURA, {
       method: 'POST',
+      mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
 
-    if (resp.ok) {
-      showToast('✅ Reporte enviado correctamente', 4000);
-      novedades = [];
-      renderNovedades();
-      btn.innerHTML = 'Reporte enviado ✓';
-    } else {
-      throw new Error('Error en el servidor');
-    }
+    showToast('✅ Reporte enviado correctamente', 4000);
+    novedades = [];
+    renderNovedades();
+    btn.innerHTML = 'Reporte enviado ✓';
+
   } catch(e) {
     showToast('❌ Error al enviar. Intenta nuevamente.');
     btn.disabled = false;
@@ -1055,18 +1054,12 @@ async function enviarCultura() {
 
     const resp = await fetch(N8N_WEBHOOK_CULTURA, {
       method: 'POST',
+      mode: 'no-cors'
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
 
-    if (resp.ok) {
-      showToast('✅ Reporte de puntos enviado correctamente', 4000);
-      puntos = [];
-      renderPuntos();
-      btn.innerHTML = 'Reporte enviado ✓';
-    } else {
-      throw new Error('Error en el servidor');
-    }
+
   } catch(e) {
     showToast('❌ Error al enviar. Intenta nuevamente.');
     btn.disabled = false;
